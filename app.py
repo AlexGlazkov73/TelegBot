@@ -1,12 +1,11 @@
 import telebot
 import configparser
-from extensions import APIException, CryptoConverter
+from extensions import APIException, CryptoConverter,keys
 
-config = configparser.ConfigParser()  # создаём объекта парсера
+config = configparser.ConfigParser()
 config.read("config.ini")
 
 token = config.get('section', 'TOKEN')
-key = config.get('section', 'keys')
 bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands = ['start', 'help'])
@@ -19,7 +18,7 @@ def starting(message: telebot.types.Message):
 @bot.message_handler(commands =['values'])
 def value(message: telebot.types.Message):
     text = 'Доступные валюты:'
-    for k in key:
+    for k in keys:
         text = '\n'.join((text, k, ))
     bot.reply_to(message, text)
 
@@ -36,7 +35,7 @@ def convert(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
-        text = f'Цена {amount} {key[quote.lower()]} в {key[base.lower()]} - {total_base}'
+        text = f'Цена {amount} {keys[quote.lower()]} в {keys[base.lower()]} - {total_base}'
         bot.send_message(message.chat.id, text)
 
 bot.polling()

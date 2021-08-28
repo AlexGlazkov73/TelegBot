@@ -1,6 +1,11 @@
 import requests
 import json
-from config import keys
+
+keys = {
+    'евро': 'EUR',
+    'рубль': 'RUB',
+    'доллар': 'USD'
+ }
 
 class APIException(Exception):
     pass
@@ -13,12 +18,12 @@ class CryptoConverter:
             raise APIException(f'Невозмоэжно перевести одинаковые валюты {base}')
 
         try:
-            quote_ticker = keys[quote.lower()]
+            quote_ticker = key_[quote.lower()]
         except KeyError:
             raise APIException(f'Не удалось обработать валюту {quote}')
 
         try:
-            base_ticker = keys[base.lower()]
+            base_ticker = key_[base.lower()]
         except KeyError:
             raise APIException(f'Не удалось обработать валюту {base}')
         try:
@@ -27,7 +32,7 @@ class CryptoConverter:
             raise APIException(f'Неправильное количество {amount}')
 
         r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
-        total_base = json.loads(r.content)[keys[base]]
+        total_base = json.loads(r.content)[key_[base]]
         total = total_base * amount
 
         return total
