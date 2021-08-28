@@ -1,12 +1,10 @@
 import telebot
 import configparser
-from extensions import APIException, CryptoConverter,keys
+from extensions import APIException, CryptoConverter, keys
 
 config = configparser.ConfigParser()
-config.read("config.ini")
 
-token = config.get('section', 'TOKEN')
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(config['section']['TOKEN'])
 
 @bot.message_handler(commands = ['start', 'help'])
 def starting(message: telebot.types.Message):
