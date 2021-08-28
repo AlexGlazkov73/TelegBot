@@ -1,2 +1,2 @@
 pytelegrambotapi
-requests
+requests~=2.26.0
