@@ -3,7 +3,7 @@ import configparser
 from extensions import APIException, CryptoConverter, keys
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('config73.ini')
 token = config.get("section", "TOKEN")
 
 bot = telebot.TeleBot(token)

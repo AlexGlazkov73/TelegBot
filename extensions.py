@@ -4,7 +4,9 @@ import json
 keys = {
     'евро': 'EUR',
     'рубль': 'RUB',
-    'доллар': 'USD'
+    'доллар': 'USD',
+    'биткоин': 'BTC',
+    'эфириум': 'ETH'
  }
 
 class APIException(Exception):
