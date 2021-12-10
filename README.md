@@ -1,2 +1,2 @@
 # Telegram Bot
-Bot converts currency as EUR, USD, RUB, BTC 
+Bot convert currency as EUR, USD, RUB, BTC 
